@@ -325,10 +325,10 @@ export default function Add() {
     return (
       <center>
         <div>
-          <h1 className="font-bold text-[#3269ff] text-2xl text-center mt-[50px]">
+          <h1 className="font-bold text-[#3269ff] text-base md:text-2xl text-center mt-[50px]">
             Select package for your note.
           </h1>
-          <p className="text-center font-sm text-gray-600">
+          <p className="text-center text-xs md:text-sm text-gray-600">
             Select package for your note Free / Premium
           </p>
           <div className="flex justify-center gap-[25px] mt-[50px]">

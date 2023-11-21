@@ -17,31 +17,37 @@
 }
 
 body {
-  
-    max-width: 1280px;
-    margin: 0 auto;
-    scroll-behavior: smooth;
+  touch-action: manipulation; /* 'manipulation' is recommended for better performance */
+  user-select: none;
+  max-width: 1280px;
+  margin: 0 auto;
+  scroll-behavior: smooth;
+}
+* {
+  touch-action: manipulation; /* 'manipulation' is recommended for better performance */
+  user-select: none;
+}
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+.follow-btn {
+  @apply text-sm text-white bg-[#0295FF] rounded-full px-2;
 }
 
-.follow-btn{
-  @apply text-sm text-white bg-[#0295FF] rounded-full px-2
-}
-
-.followed-btn{
-  @apply text-sm text-white bg-[#7a7a7a] rounded-full px-2
+.followed-btn {
+  @apply text-sm text-white bg-[#7a7a7a] rounded-full px-2;
 }
 
 /* .towhite {
   filter: brightness(1000%);
 } */
 
-
-.myshadow{
+.myshadow {
   box-shadow: 0px 4px 18px 0px rgba(0, 0, 0, 0.06);
   padding: 20px;
 }
 
-.bottom-nav{
+.bottom-nav {
   margin: 0 auto;
 }
 
@@ -51,16 +57,16 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
   border-radius: 50px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }

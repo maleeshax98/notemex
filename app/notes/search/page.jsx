@@ -107,7 +107,7 @@ export default function Seacrh() {
             {!loading && !hasMore && loaded && (
               <div className="m-[20px]">
                 <center>
-                  <p>No more data..</p>
+                  <p> No more data to display!</p>
                 </center>
               </div>
             )}
@@ -138,7 +138,7 @@ export default function Seacrh() {
             {!loadingUser && !hasMoreUsers && loaded && (
               <div className="m-[20px]">
                 <center>
-                  <p>No more data..</p>
+                  <p> No more data to display!</p>
                 </center>
               </div>
             )}

@@ -32,7 +32,7 @@ export default function FollowingCard({ data }) {
             </Link>
           </div>
           <div>
-            <Badge content="5" />
+            {/* <Badge content="" /> */}
           </div>
         </div>
         <hr />
