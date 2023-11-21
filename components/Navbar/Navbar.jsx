@@ -56,7 +56,7 @@ export default function Navbar() {
   //   return null;
   // }
 
-  if (pathName.split("/").includes("notes") && !pathName.split("/").includes("add")) {
+  if (pathName.split("/").includes("notes") && !pathName.split("/").includes("add") && !pathName.split("/").includes("search")) {
     return null;
   }
 
