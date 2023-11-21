@@ -18,7 +18,7 @@ export async function GET(req, { params }) {
       return NextResponse.json({ error: "404 Not Found" }, { status: 404 });
     }
     const { searchParams } = new URL(req.url);
-    const query = searchParams.get("q");
+    const query = searchParams.get("q").toLowerCase();
     const param = searchParams.get("page");
 
     const page = param;
