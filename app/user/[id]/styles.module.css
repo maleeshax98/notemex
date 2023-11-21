@@ -1,0 +1,11 @@
+.container{
+    gap: 0px;
+}
+
+.sidebar{
+    flex: 3;
+}
+
+.page {
+    flex: 9;
+}

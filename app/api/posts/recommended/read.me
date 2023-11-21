@@ -1,0 +1,26 @@
+function combineUniqueElements(array1, array2) {
+      // Initialize the result array
+      let result = [];
+
+      // Loop through array1
+      for (let element of array1) {
+        if (!result.includes(element)) {
+          result.push(element);
+        }
+      }
+
+      // Loop through array2
+      for (let element of array2) {
+        if (!result.includes(element)) {
+          result.push(element);
+        }
+      }
+
+      // // Shuffle the result array using Fisher-Yates shuffle
+      // for (let i = result.length - 1; i > 0; i--) {
+      //   const j = Math.floor(Math.random() * (i + 1));
+      //   [result[i], result[j]] = [result[j], result[i]];
+      // }
+
+      return result;
+    }

@@ -1,0 +1,9 @@
+.container{
+    gap: 10px;
+    /* justify-content: space-between; */
+
+}
+
+.details{
+    flex: 8;
+}
