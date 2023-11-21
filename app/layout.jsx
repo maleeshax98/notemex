@@ -11,12 +11,17 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "NoteMe X",
   description: "Share your educational notes and skills with others..",
+  icons: {
+    rel: "icon",
+    type: "image/png",
+    sizes: "16x16",
+    url: '/logo_notemex.png',
+  },
 };
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 export const revalidate = 0;
-
 
 export default function RootLayout({ children }) {
   return (
@@ -28,6 +33,7 @@ export default function RootLayout({ children }) {
               <ToasterContext />
               <Navbar />
               <BottemNav />
+              <link rel="icon" href="/logo_notemex.png" sizes="any" />
               {children}
             </ThemeContext>
           </QueryContextProvider>
