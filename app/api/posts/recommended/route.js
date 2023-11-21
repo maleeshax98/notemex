@@ -3,30 +3,30 @@ import { AuthOptions } from "../../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 const { ObjectId } = require("mongodb");
 
+function shuffleArray(array) {
+  const shuffledArray = [...array];
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [
+      shuffledArray[j],
+      shuffledArray[i],
+    ];
+  }
+  return shuffledArray;
+}
+
+function combineArraysWithoutDuplicates(arr1, arr2, uniqueKey) {
+  const uniqueKeysSet = new Set(arr1.map((obj) => obj[uniqueKey]));
+  for (const obj of arr2) {
+    if (!uniqueKeysSet.has(obj[uniqueKey])) {
+      arr1.push(obj);
+      uniqueKeysSet.add(obj[uniqueKey]);
+    }
+  }
+
+  return arr1;
+}
 export async function GET(req) {
-  function shuffleArray(array) {
-    const shuffledArray = [...array];
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [
-        shuffledArray[j],
-        shuffledArray[i],
-      ];
-    }
-    return shuffledArray;
-  }
-
-  function combineArraysWithoutDuplicates(arr1, arr2, uniqueKey) {
-    const uniqueKeysSet = new Set(arr1.map((obj) => obj[uniqueKey]));
-    for (const obj of arr2) {
-      if (!uniqueKeysSet.has(obj[uniqueKey])) {
-        arr1.push(obj);
-        uniqueKeysSet.add(obj[uniqueKey]);
-      }
-    }
-
-    return arr1;
-  }
 
   const session = await getServerSession(AuthOptions);
 
@@ -96,14 +96,21 @@ export async function GET(req) {
           },
         })),
       },
+      include: {
+        userNotes: {
+          include: {
+            user: true,
+          },
+        },
+      },
     });
 
     const filteredNotes = combineArraysWithoutDuplicates(
-      tagsNotes,
       matchingNotes,
+      tagsNotes,
       "id"
     );
-
+      console.log(matchingNotes)
     const allNotes = await prisma.note.findMany({
       take: postsPerPage,
       skip: skip,
@@ -122,12 +129,13 @@ export async function GET(req) {
     const toCombineFilters = shuffleArray(filteredNotes);
 
     const toCombineAll = shuffleArray(allNotes);
-
+    
     const finalNotes = combineArraysWithoutDuplicates(
       toCombineFilters,
       toCombineAll,
       "id"
     );
+
     return NextResponse.json({ results: finalNotes, hasMore }, { status: 200 });
   } catch (err) {
     console.error(err);
