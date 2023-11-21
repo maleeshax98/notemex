@@ -424,8 +424,9 @@ export default function Add() {
             <div className=" p-4 ">
               <div>
                 <p className="font-semibold text-sm  text-gray-600">
-                  Add search tags ( you can skip )
+                  Add search tags 
                 </p>
+                <p className="text-xs ">( you can skip )</p>
 
                 <div className=" p-[10px] rounded-md align-middle">
                   <div className="flex flex-wrap ">
@@ -451,13 +452,14 @@ export default function Add() {
                         </p>
                       ))}
                   </div>
-                  <div className="flex flex-wrap mt-[10px]  mb-[10px]">
+                  <div className="flex flex-wrap mt-[10px] gap-[500px] mb-[10px]">
                     <div>
                       {tagError && <p className="text-red-600">{tagError}</p>}
-                      <input
+                     <div className="flex flex-wrap items-center gap-[20px]">
+                     <input
                         className={`${
-                          tagError ? "border-red-600" : ""
-                        } p-[5px] outline-none border-2 rounded-md`}
+                          tagError ? "border-red-600 w-auto" : ""
+                        } p-[5px] outline-none border-2 rounded-md w-auto`}
                         type="text"
                         onChange={(e) => setNewTag(e.target.value)}
                         value={newTag}
@@ -469,6 +471,7 @@ export default function Add() {
                       >
                         Add
                       </button>
+                     </div>
                     </div>
                   </div>
                 </div>

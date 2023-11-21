@@ -56,9 +56,9 @@ export default function Navbar() {
   //   return null;
   // }
 
-  // if (pathName.split("/").includes("note")) {
-  //   return null;
-  // }
+  if (pathName.split("/").includes("notes") && !pathName.split("/").includes("add")) {
+    return null;
+  }
 
   // alert(pathName)
   return (
@@ -82,7 +82,11 @@ export default function Navbar() {
       <nav className="  w-full max-w-[1280px] px-4 py-3 md:mt-2 mb-4 shadow-sm z-50 bg-white rounded-md">
         <div className="flex flex-wrap items-center justify-between gap-y-4 text-white">
           <div>
-            <h1 className="font-bold text-lg md:text-2xl text-[#0e1038]">NoteMe X.</h1>
+            <Link href={"/"}>
+              <h1 className="font-bold text-lg md:text-2xl text-[#0e1038]">
+                NoteMe X.
+              </h1>
+            </Link>
           </div>
 
           <div className="hidden md:flex gap-[60px] items-center justify-center ">

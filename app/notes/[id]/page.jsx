@@ -94,7 +94,15 @@ export default function PostPage({ params }) {
       toast.success("Shareble link copied", toastStyles);
     };
     return (
-      <div className="m-[15px]">
+      <div className="m-[15px]  mt-[30px]">
+        <button
+            className=" p-2 font-semibold shadow-md mb-[20px] bg-white rounded-lg"
+            onClick={() => {
+              window.history.back();
+            }}
+          >
+           Go Back
+          </button>
         <div className="flex gap-[20px] items-center">
           <Image
             src="/icons/note.svg"

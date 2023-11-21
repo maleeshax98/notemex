@@ -56,8 +56,16 @@ export default function SingleCard({ data }) {
     <div
       className={`${Styles.container} md:flex p-4 m-4 rounded-lg max-w-[1050px] bg-[#ffffff] myshadow`}
     >
-      <div className={`${Styles.details} flex flex-col gap-[10px] mb-[10px] md:mb-[0px]`}>
-        <Link href={ pathName === "/acount" && data?.approved !== "APPROVED" ? '#' : `/notes/${data?.id}`}>
+      <div
+        className={`${Styles.details} flex flex-col gap-[10px] mb-[10px] md:mb-[0px]`}
+      >
+        <Link
+          href={
+            pathName === "/acount" && data?.approved !== "APPROVED"
+              ? "#"
+              : `/notes/${data?.id}`
+          }
+        >
           <div className="flex gap-[20px] items-center">
             <Image
               src="/icons/note.svg"
@@ -78,18 +86,24 @@ export default function SingleCard({ data }) {
                 {formattedTime}
               </p>
             </div>
-            { pathName === "/acount" && <div className="flex items-center gap-[10px]">
-              <Image
-                src={data?.approved === 'PENDING' ? `/icons/new/pending.svg` : `/icons/new/approved.svg`}
-                className="w-[20px] h-[20px]"
-                alt=""
-                width={20}
-                height={20}
-              />
-              <p className="text-[#747474] font-semibold text-xs">
-                {data?.approved.toLowerCase()}
-              </p>
-            </div>}
+            {pathName === "/acount" && (
+              <div className="flex items-center gap-[10px]">
+                <Image
+                  src={
+                    data?.approved === "PENDING"
+                      ? `/icons/new/pending.svg`
+                      : `/icons/new/approved.svg`
+                  }
+                  className="w-[20px] h-[20px]"
+                  alt=""
+                  width={20}
+                  height={20}
+                />
+                <p className="text-[#747474] font-semibold text-xs">
+                  {data?.approved.toLowerCase()}
+                </p>
+              </div>
+            )}
           </div>
 
           <div>
@@ -101,27 +115,29 @@ export default function SingleCard({ data }) {
             </p>
           </div>
         </Link>
-        <Link href={`/user/${data?.userNotes[0]?.user?.id}`}>
-          <div className="flex items-center gap-[10px] mt-2">
-            <div className="rounded-full w-[30px] h-[30px] overflow-hidden relative">
-              <Image
-                src={data?.userNotes[0]?.user?.image}
-                fill
-                className="object-cover w-full h-full"
-                alt=""
-              />
+        {data?.userNotes && (
+          <Link href={`/user/${data?.userNotes[0]?.user?.id}`}>
+            <div className="flex items-center gap-[10px] mt-2">
+              <div className="rounded-full w-[30px] h-[30px] overflow-hidden relative">
+                <Image
+                  src={data?.userNotes[0]?.user?.image}
+                  fill
+                  className="object-cover w-full h-full"
+                  alt=""
+                />
+              </div>
+              <div>
+                <p className="text-[#747474] font-semibold text-xs">
+                  {data?.userNotes[0]?.user?.name}
+                </p>
+                <p className="text-[#a0a0a0] font-semibold text-xs">
+                  Followers {data?.userNotes[0]?.user?.followers?.length}
+                </p>
+              </div>
+              {/* <button className="follow-btn">Follow</button> */}
             </div>
-            <div>
-              <p className="text-[#747474] font-semibold text-xs">
-                {data?.userNotes[0]?.user?.name}
-              </p>
-              <p className="text-[#a0a0a0] font-semibold text-xs">
-                Followers {data?.userNotes[0]?.user?.followers?.length}
-              </p>
-            </div>
-            {/* <button className="follow-btn">Follow</button> */}
-          </div>
-        </Link>
+          </Link>
+        )}
       </div>
 
       <div
@@ -150,7 +166,7 @@ export default function SingleCard({ data }) {
                     height={20}
                     alt=""
                     onClick={() => {
-                      disLike(data?.id)
+                      disLike(data?.id);
                       setLiked(false);
                       setLikes((prev) => prev - 1);
                     }}
@@ -195,17 +211,21 @@ export default function SingleCard({ data }) {
               alt=""
             />
           </Link>
-          {session?.user?.id === data?.userNotes[0]?.user?.id && (
-            <Image
-              src="/icons/new/delete.svg"
-              width={15}
-              height={15}
-              className="w-[25px] h-[25px] cursor-pointer"
-              alt=""
-              onClick={() => {
-                deleteNote(data?.id);
-              }}
-            />
+          {data?.userNotes && (
+            <>
+              {session?.user?.id === data?.userNotes[0]?.user?.id && (
+                <Image
+                  src="/icons/new/delete.svg"
+                  width={15}
+                  height={15}
+                  className="w-[25px] h-[25px] cursor-pointer"
+                  alt=""
+                  onClick={() => {
+                    deleteNote(data?.id);
+                  }}
+                />
+              )}
+            </>
           )}
         </div>
       </div>
