@@ -117,7 +117,7 @@ export default function Acount() {
               {!loading && !hasMore && (
                 <div className="m-[20px]">
                   <center>
-                    <p>No more data..</p>
+                    <p> No more data to display!</p>
                   </center>
                 </div>
               )}

@@ -8,9 +8,9 @@ export default function SeachModal({ open, setOpen }) {
   const router = useRouter();
   // console.log(query)
   const handleSearch = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (query || !query.trim()) {
-      setOpen( prev => !prev )
+      setOpen((prev) => !prev);
       router.push(`/notes/search?q=${query}`);
     }
   };
@@ -29,20 +29,28 @@ export default function SeachModal({ open, setOpen }) {
             }}
           />
 
-          <div >
+          <div>
             <form className="flex gap-[5px] mt-[20px]" onSubmit={handleSearch}>
-            <input
-              type="text"
-              placeholder="Search"
-              className=" border-2 rounded-xl font-semibold text-gray-600 p-2 w-full outline-none focus:border-blue-400"
-              value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-              }}
-            />
-            <button className="text-sm bg-blue-600 font-semibold p-2 text-white rounded-xl">Search</button>
+              <input
+                type="text"
+                placeholder="Search"
+                className=" border-2 rounded-xl font-semibold text-gray-600 p-2 w-full outline-none focus:border-blue-400"
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                }}
+              />
+
+              <button className="text-sm p-2 text-white rounded-xl">
+                <Image
+                  src="/icons/new/search.svg"
+                  className="cursor-pointer"
+                  alt=""
+                  width={35}
+                  height={35}
+                />
+              </button>
             </form>
-            
           </div>
           <div className="mt-[10px]"></div>
         </div>

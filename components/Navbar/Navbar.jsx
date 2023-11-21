@@ -82,7 +82,7 @@ export default function Navbar() {
       <nav className="  w-full max-w-[1280px] px-4 py-3 md:mt-2 mb-4 shadow-sm z-50 bg-white rounded-md">
         <div className="flex flex-wrap items-center justify-between gap-y-4 text-white">
           <div>
-            <h1 className="font-bold text-2xl text-[#0e1038]">NoteMe X.</h1>
+            <h1 className="font-bold text-lg md:text-2xl text-[#0e1038]">NoteMe X.</h1>
           </div>
 
           <div className="hidden md:flex gap-[60px] items-center justify-center ">
@@ -214,7 +214,7 @@ export default function Navbar() {
                   setOpen(true);
                 }}
                 alt=""
-                width={35}
+                width={30}
                 height={35}
               />
               <div>

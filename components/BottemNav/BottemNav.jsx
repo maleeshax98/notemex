@@ -88,7 +88,7 @@ export default function BottemNav() {
                 <Link href={"/user/following"}>
                   <div className="text-center">
                     <center>
-                      <Badge content="5">
+                      <Badge content="">
                         <div
                           className={` ${
                             pathName === "/"
