@@ -36,10 +36,10 @@ const useDpUpload = (toastStyles) => {
       return;
     }
 
-    const maxFileSize = 2 * 1024 * 1024;
+    const maxFileSize = 10 * 1024 * 1024;
     if (image.size > maxFileSize) {
       toast.error(
-        "Please select an image file with a size less than 2MB.",
+        "Please select an image file with a size less than 10MB.",
         toastStyles
       );
       setUploading(false);
