@@ -222,7 +222,7 @@ export default function Navbar() {
                 height={35}
               />
               <div>
-                <Notification />
+                 {session && status === "authenticated" && <Notification />  }
               </div>
               {session && status === "authenticated" ? (
                 <Link href={"/acount"}>
