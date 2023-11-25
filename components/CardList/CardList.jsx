@@ -11,7 +11,7 @@ export default function CardList({ data }) {
       {data &&
         data.map((doc) => (
           <div key={doc.id}>
-            <SingleCard key={doc.id} data={doc} />
+            <SingleCard key={doc.id} data={doc}  />
           </div>
         ))}
     </div>
