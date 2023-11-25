@@ -9,7 +9,7 @@ export default function NotificationCard({ data }) {
   });
   return (
     <div>
-      <Link href={data?.noteId ? `/note/${data?.noteId}` : data?.followerId ? `/user/${data?.followerId}` : '#'} className=" border-none outline-none">
+      <Link href={data?.noteId ? `/notes/${data?.noteId}` : data?.followerId ? `/user/${data?.followerId}` : '#'} className=" border-none outline-none">
       <div className=" flex gap-[15px] items-center m-2">
         <div>
           <div className="rounded-full w-[30px] h-[30px] overflow-hidden relative">
