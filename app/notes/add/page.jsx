@@ -139,10 +139,10 @@ export default function Add() {
 
         return;
       }
-      const maxFileSize = 2 * 1024 * 1024;
+      const maxFileSize = 5 * 1024 * 1024;
       if (images[i].size > maxFileSize) {
         toast.error(
-          "Please select an image file (JPEG, PNG, GIF, etc.) with a size less than 2MB.",
+          "Please select an image file (JPEG, PNG, GIF, etc.) with a size less than 5MB.",
           toastStyles
         );
         setUploading(false);
@@ -213,18 +213,18 @@ export default function Add() {
     for (let i = 0; i < pdfslength; i++) {
       if (pdfs[i].type !== "application/pdf") {
         toast.error(
-          "Please select an adPDF file (JPEG, PNG, GIF, etc.) with a size less than 2MB.",
+          "Please select an adPDF file (JPEG, PNG, GIF, etc.) with a size less than 10MB.",
           toastStyles
         );
         setUploading(false);
 
         return;
       }
-      const maxFileSize = 2 * 1024 * 1024;
+      const maxFileSize = 10 * 1024 * 1024;
 
       if (pdfs[i].size > maxFileSize) {
         toast.error(
-          "Please select an 2PDF file (JPEG, PNG, GIF, etc.) with a size less than 2MB.",
+          "Please select an 2PDF file (JPEG, PNG, GIF, etc.) with a size less than 10MB.",
           toastStyles
         );
         setUploading(false);
