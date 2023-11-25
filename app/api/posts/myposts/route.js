@@ -59,6 +59,9 @@ export async function GET(req, { params }) {
           },
         },
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     return NextResponse.json({ results: posts, hasMore }, { status: 200 });
