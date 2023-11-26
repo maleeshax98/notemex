@@ -4,6 +4,7 @@ import CardList from "@/components/CardList/CardList";
 import { useInView } from "react-intersection-observer";
 import useGetAllNotes from "@/hooks/useGetAllNotes";
 import LoadingCard from "@/components/LoadingCard/LoadingCard";
+import HowToUseModel from "@/components/HowToUseModel/HowToUseModel";
 
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
@@ -37,6 +38,7 @@ export default function Home() {
 
   return (
     <main>
+      <HowToUseModel />
       <CardList data={data} />
 
       {!loading && !hasMore && (
