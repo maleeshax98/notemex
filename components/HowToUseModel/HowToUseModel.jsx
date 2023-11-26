@@ -43,7 +43,7 @@ export default function HowToUseModel() {
               }}
               className="font-semibold p-2 px-2 rounded-md bg-white border-2 outline-none shadow-sm hover:shadow-md text-gray-700 text-sm"
             >
-              Don't Show Again
+              Dont Show Again
             </button>
           </div>
         </div>
