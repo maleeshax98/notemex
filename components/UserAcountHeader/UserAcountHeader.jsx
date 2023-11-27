@@ -147,7 +147,7 @@ function UserAcountHeader({ id, count }) {
                 />
               </div>
 
-              <div className="relative w-[150px] h-[150px] rounded-full border-4 border-gray-300 mt-[-80px]">
+              <div className="relative w-[150px] h-[150px] rounded-full border-4 border-gray-300 mt-[-80px] bg-white">
                 <Image
                   src={data?.image}
                   className="w-full h-full object-cover rounded-full "
@@ -166,7 +166,7 @@ function UserAcountHeader({ id, count }) {
                     </span>
                   </h1>
                   <p className="max-w-[450px] text-sm text-gray-500 mb-[10px]">
-                    {data?.bio && `${data?.bio}`}
+                    {data?.bio !== "0" && `${data?.bio}`}
                   </p>
                   <div className=" items-center justify-center">
                     {!loading && (
