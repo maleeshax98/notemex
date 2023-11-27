@@ -75,3 +75,22 @@ body {
 .userList::-webkit-scrollbar {
   height: 5px;
 }
+
+
+.userList::before,
+.userList::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20px; /* Adjust the width of the vanished ends */
+  background: linear-gradient(to right, transparent, white); /* Adjust the gradient as needed */
+}
+
+.userList::before {
+  left: -20px; /* Adjust the left position to control the vanishing effect */
+}
+
+.userList::after {
+  right: -20px; /* Adjust the right position to control the vanishing effect */
+}
