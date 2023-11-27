@@ -16,7 +16,7 @@ export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const param = searchParams.get("page");
     const page = param;
-    const postsPerPage = 1;
+    const postsPerPage = 10;
     const skip = postsPerPage * (page - 1);
 
     const userId = session?.user?.id;
@@ -56,7 +56,12 @@ export async function GET(req) {
 
       take: postsPerPage,
       skip: skip,
+      orderBy: {
+        createdAt: "desc",
+      },
     });
+
+    console.log(followers)
 
     return NextResponse.json({ followers, hasMore }, { status: 200 });
   } catch (err) {
