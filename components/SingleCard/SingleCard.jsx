@@ -21,8 +21,8 @@ export default function SingleCard({ data }) {
     const userId = session?.user?.id;
     if (data?.likes?.includes(userId)) {
       setLiked(true);
-      setLikes(data?.likes.length);
     }
+      setLikes(data?.likes.length);
   }, [data, session]);
 
   const formattedTime = formatDistanceToNow(new Date(data?.createdAt), {
