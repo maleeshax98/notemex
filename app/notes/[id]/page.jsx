@@ -12,8 +12,13 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import useLike from "@/hooks/useLike";
 import useUpdateRecoUser from "@/hooks/useUpdateRecoUser";
+import PayButton from "./_components/PayButton/PayButton";
+import { Button } from "@/Context/ThemeContext/ThemeContext";
+import { useRouter } from "next/navigation";
 
 export default function PostPage({ params }) {
+  const route = useRouter();
+
   const { data, error, loading } = useGetOneNote(params.id);
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
@@ -25,6 +30,8 @@ export default function PostPage({ params }) {
       setLiked(true);
       setLikes(data?.likes.length);
     }
+    setLikes(data?.likes.length);
+
 
     if (data?.title || data?.tags) {
       update(
@@ -96,13 +103,13 @@ export default function PostPage({ params }) {
     return (
       <div className="m-[15px]  mt-[30px]">
         <button
-            className=" p-2 font-semibold shadow-md mb-[20px] bg-white rounded-lg"
-            onClick={() => {
-              window.history.back();
-            }}
-          >
-           Go Back
-          </button>
+          className=" p-2 font-semibold shadow-md mb-[20px] bg-white rounded-lg"
+          onClick={() => {
+            window.history.back();
+          }}
+        >
+          Go Back
+        </button>
         <div className="flex gap-[20px] items-center">
           <Image
             src="/icons/note.svg"
@@ -129,6 +136,190 @@ export default function PostPage({ params }) {
           <h1 className="text-[#626262] font-bold text-2xl">
             {titleCapitalized}
           </h1>
+        </div>
+        <div className="m-[20px]">
+          {data?.type === "Free" ? (
+            <div className="mt-[0px] mb-[50px] p-2">
+              <div className="mb-[15px] flex gap-[10px] flex-wrap justify-center">
+                {data?.images.map((img) => (
+                  <div key={img}>
+                    <ImageContent link={img} />
+                    <div>
+                      <p className="text-sm text-gray-600 text-center">
+                        Click to view
+                      </p>
+                    </div>
+                  </div>
+                ))}
+                {/* <ImageContent /> */}
+              </div>
+              <div className="mb-[15px] flex gap-[10px] flex-wrap justify-center">
+                {data?.files.length > 0 && (
+                  <>
+                    {data?.files.map((file, index) => (
+                      <div
+                        key={file}
+                        className="flex justify-center items-center flex-wrap gap-[10px]"
+                      >
+                        <Link href={file} >
+                          <button className="p-2 rounded-md text-white font-semibold text-center bg-blue-700">
+                            Download File {index + 1}
+                          </button>
+                        </Link>
+                      </div>
+                    ))}
+                  </>
+                )}
+              </div>
+              <div
+                className={styles.default}
+                dangerouslySetInnerHTML={{ __html: data?.content }}
+              ></div>
+            </div>
+          ) : data?.type === "Pro" ? (
+            status === "authenticated" ? (
+              data?.userNotes[0]?.user?.id === session?.user?.id ? (
+                <>
+                  <div className="mt-[0px] mb-[50px] p-2">
+                    <div className="mb-[15px] flex gap-[10px] flex-wrap justify-center">
+                      {data?.images.map((img) => (
+                        <div key={img}>
+                          <ImageContent link={img} />
+                          <div>
+                            <p className="text-sm text-gray-600 text-center">
+                              Click to view
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                      {/* <ImageContent /> */}
+                    </div>
+                    <div className="mb-[15px] flex gap-[10px] flex-wrap justify-center">
+                      {data?.files.length > 0 && (
+                        <>
+                          {data?.files.map((file, index) => (
+                            <div
+                              key={file}
+                              className="flex justify-center items-center flex-wrap gap-[10px]"
+                            >
+                              <Link href={file} >
+                                <button className="p-2 rounded-md text-white font-semibold text-center bg-blue-700">
+                                  Download File {index + 1}
+                                </button>
+                              </Link>
+                            </div>
+                          ))}
+                        </>
+                      )}
+                    </div>
+                    <div
+                      className={styles.default}
+                      dangerouslySetInnerHTML={{ __html: data?.content }}
+                    ></div>
+                  </div>
+                </>
+              ) : data?.have === true ? (
+                <div className="mt-[0px] mb-[50px] p-2">
+                  <div className="mb-[15px] flex gap-[10px] flex-wrap justify-center">
+                    {data?.images.map((img) => (
+                      <div key={img}>
+                        <ImageContent link={img} />
+                        <div>
+                          <p className="text-sm text-gray-600 text-center">
+                            Click to view
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                    {/* <ImageContent /> */}
+                  </div>
+                  <div className="mb-[15px] flex gap-[10px] flex-wrap justify-center">
+                    {data?.files.length > 0 && (
+                      <>
+                        {data?.files.map((file, index) => (
+                          <div
+                            key={file}
+                            className="flex justify-center items-center flex-wrap gap-[10px]"
+                          >
+                            <Link href={file} >
+                              <button className="p-2 rounded-md text-white font-semibold text-center bg-blue-700">
+                                Download File {index + 1}
+                              </button>
+                            </Link>
+                          </div>
+                        ))}
+                      </>
+                    )}
+                  </div>
+                  <div
+                    className={styles.default}
+                    dangerouslySetInnerHTML={{ __html: data?.content }}
+                  ></div>
+                </div>
+              ) : (
+                <div>
+                  <center>
+                    <p className="">{data?.desc}</p>
+                    <Link href={"#comments"}>
+                      <p className="mt-[10px] text-blue-600 cursor-pointer">
+                        Reviews
+                      </p>
+                    </Link>
+                    <div className="flex justify-center mt-[10px] border-2 shadow-sm p-4 rounded-lg">
+                      <div className="text-left">
+                        <p className="font-bold text-2xl text-gray-800">
+                          Rs.{data?.price}.00
+                        </p>
+                        <p className="text-xs text-gray-500 mb-[10px]">
+                          *This is a pro note and you need to buy it
+                        </p>
+                        <PayButton noteId={data?.id} />
+                      </div>
+                    </div>
+                  </center>
+                </div>
+              )
+            ) : (
+              <div>
+                <center>
+                  <div>
+                    <p className="font-bold text-xl text-gray-800">
+                      Login to countinue and buy note
+                    </p>
+                    <Link href={"#comments"}>
+                      <p className="mb-[10px] text-blue-600 cursor-pointer">
+                        Reviews
+                      </p>
+                    </Link>
+                    <Button
+                      size="lg"
+                      variant="outlined"
+                      color="blue-gray"
+                      className="flex items-center gap-3 p-2"
+                      onClick={() => {
+                        route.push("/signin");
+                      }}
+                    >
+                      <Image
+                        src="/icons/google.svg"
+                        alt="metamask"
+                        width={20}
+                        height={20}
+                        className="h-6 w-6"
+                      />
+                      Continue with Google
+                    </Button>
+                  </div>
+                </center>
+              </div>
+            )
+          ) : (
+            <>
+              <p>{data?.desc}</p>
+            </>
+          )}
+        </div>
+        <div className="mt-[40px] mb-[40px]">
           <Link href={`/user/${data?.userNotes[0]?.user?.id}`}>
             <div className="mt-[10px]">
               <div className="flex items-center gap-[10px]">
@@ -205,41 +396,7 @@ export default function PostPage({ params }) {
             </div>
           </div>
         </div>
-
-        <div className="mt-[0px] mb-[50px] p-2">
-          <div className="mb-[15px] flex gap-[10px] flex-wrap justify-center">
-            {data?.images.map((img) => (
-              <div key={img}>
-                <ImageContent link={img} />
-              </div>
-            ))}
-            {/* <ImageContent /> */}
-          </div>
-          <div className="mb-[15px] flex gap-[10px] flex-wrap justify-center">
-            {data?.files.length > 0 && (
-              <>
-                {data?.files.map((file, index) => (
-                  <div
-                    key={file}
-                    className="flex justify-center items-center flex-wrap gap-[10px]"
-                  >
-                    <Link href={file} download={"notemex"}>
-                      <button className="p-2 rounded-md text-white font-semibold text-center bg-blue-700">
-                        Download File {index + 1}
-                      </button>
-                    </Link>
-                  </div>
-                ))}
-              </>
-            )}
-          </div>
-          <div
-            className={styles.default}
-            dangerouslySetInnerHTML={{ __html: data?.content }}
-          ></div>
-        </div>
-
-        <div className="mt-[15px]">
+        <div className="mt-[50px]">
           <CommentSection id={data?.id} />
         </div>
         <section id="comments">

@@ -80,7 +80,7 @@ export default function Add() {
   const [desc, setDesc] = useState("");
   const [imgArr, setImgArr] = useState([]);
   const [filesArr, setFilesArr] = useState([]);
-  const [price, setPrice] = useState("0");
+  const [price, setPrice] = useState("50");
 
   const [tagError, setTagError] = useState(null);
   const [newTag, setNewTag] = useState("");
@@ -315,6 +315,12 @@ export default function Add() {
     if (isNaN(intPrice)) {
       toast.error("Please set a valid price ", toastStyles);
       setActiveStep(3);
+      return;
+    }
+
+    if(type === "Pro" && intPrice < 50){
+      toast.error("Minimum price is Rs.50 ", toastStyles);
+      setActiveStep(4);
       return;
     }
 
@@ -638,7 +644,7 @@ export default function Add() {
             <div className=" p-4 ">
               <div>
                 <p className="font-semibold text-sm  text-gray-600">
-                  Set Price{" "}
+                  Set Price{" (LKR - RS.) min - Rs.50"}
                 </p>
 
                 <div className=" p-[10px] rounded-md align-middle">

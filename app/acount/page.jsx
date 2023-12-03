@@ -27,6 +27,8 @@ export default function Acount() {
   const { get, loading, newData: data, hasMore } = useGetMyPosts();
   const [finalData, setFinalData] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [edited, setEdited] = useState(false);
+
 
   useEffect(() => {
     get(page);
@@ -60,7 +62,7 @@ export default function Acount() {
   if (session) {
     return (
       <div className="p-3">
-        <AcountEditModel open={open2} setOpen={setOpen2} />
+        <AcountEditModel open={open2} setOpen={setOpen2} setEdited={setEdited} />
 
         <div className={`${Styles.container} lg:flex`}>
           {/* <div className={Styles.sidebar}>
@@ -83,7 +85,7 @@ export default function Acount() {
                 height={30}
               />
             </button> */}
-            <AcountHeader setOpen={setOpen2} />
+            <AcountHeader setOpen={setOpen2} edited={edited} />
             {/* <div className="flex items-center justify-center mt-[10px] gap-[20px]">
               <button
                 className={`${

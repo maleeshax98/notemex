@@ -21,23 +21,24 @@ export const AuthOptions = {
           image: user.iamge,
           coverImage: user.coverImage,
           bio: user.bio,
+          role: user?.role,
         };
       }
 
       if (trigger === "update") {
-        console.log(session)
-        if(session.name){
+        console.log(session);
+        if (session.name) {
           token.name = session.name;
         }
-        if(session.coverImage){
+        if (session.coverImage) {
           token.coverImage = session.coverImage;
         }
-        if(session.bio){
+        if (session.bio) {
           token.bio = session.bio;
         }
-        if(session.image){
+        if (session.image) {
           token.image = session.image;
-          token.picture = session.image
+          token.picture = session.image;
         }
       }
       return token;
@@ -52,20 +53,19 @@ export const AuthOptions = {
         // session.coverImage = newSession.coverImage;
         // session.bio = newSession.bio;
         // session.image = newSession.image;
-        
-        if(newSession.name){
+
+        if (newSession.name) {
           session.name = newSession.name;
         }
-        if(newSession.coverImage){
+        if (newSession.coverImage) {
           session.coverImage = newSession.coverImage;
         }
-        if(newSession.bio){
+        if (newSession.bio) {
           session.bio = newSession.bio;
         }
-        if(newSession.image){
+        if (newSession.image) {
           session.image = newSession.image;
         }
-
       }
       return {
         ...session,
@@ -74,6 +74,7 @@ export const AuthOptions = {
           id: token.id,
           coverImage: token.coverImage,
           bio: token.bio,
+          role: user?.role,
         },
       };
     },

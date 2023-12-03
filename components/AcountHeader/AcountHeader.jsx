@@ -14,12 +14,13 @@ const toastStyles = {
   },
 };
 
-function AcountHeader({ setOpen }) {
+function AcountHeader({ setOpen, edited }) {
   const { data: session } = useSession();
   const [followers, setFollowers] = useState(0);
   const [following, setFollowing] = useState(0);
   const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(0);
+  const [userDetails, setUserDetails] = useState(null);
 
   const fetchUser = async (id) => {
     try {
@@ -29,6 +30,7 @@ function AcountHeader({ setOpen }) {
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/me?page=1`
       );
       if (res?.data?.user) {
+        setUserDetails(res?.data?.user);
         const followers = res?.data?.user?.followers?.length;
         const followings = res?.data?.user?.following?.length;
         setCount(res?.data?.count);
@@ -50,7 +52,7 @@ function AcountHeader({ setOpen }) {
 
   useEffect(() => {
     fetchUser(session?.user?.id);
-  }, [session]);
+  }, [session, edited]);
 
   const share = () => {
     navigator.clipboard.writeText(
@@ -95,7 +97,7 @@ function AcountHeader({ setOpen }) {
             <button
               className="z-[100] bg-white p-2 rounded-lg absolute shadow-md top-12 left-0 m-[10px] "
               onClick={() => {
-                signOut()
+                signOut();
               }}
             >
               Log Out
@@ -113,7 +115,13 @@ function AcountHeader({ setOpen }) {
             </button>
             <div className="w-full h-[150px] rounded-md overflow-hidden relative">
               <Image
-                src={session?.user?.coverImage}
+                src={
+                  edited
+                    ? `${session?.user?.coverImage}`
+                    : userDetails
+                    ? `${userDetails?.coverImage}`
+                    : `${session?.user?.coverImage}`
+                }
                 className="w-full h-full object-cover rounded-md "
                 fill
                 alt="cover image"
@@ -121,7 +129,13 @@ function AcountHeader({ setOpen }) {
             </div>
             <div className="relative w-[150px] h-[150px] rounded-full border-4 border-gray-300 mt-[-80px]">
               <Image
-                src={session?.user?.image}
+                src={
+                  edited
+                    ? `${session?.user?.image}`
+                    : userDetails
+                    ? `${userDetails?.image}`
+                    : `${session?.user?.image}`
+                }
                 className="w-full h-full object-cover rounded-full "
                 fill
                 alt="DP"
@@ -130,7 +144,13 @@ function AcountHeader({ setOpen }) {
             <div className="mt-[5px]">
               <center>
                 <div className="flex justify-center items-center">
-                  <h1 className="font-semibold">{session?.user?.name}</h1>
+                  <h1 className="font-semibold">
+                    {edited
+                      ? `${session?.user?.name}`
+                      : userDetails
+                      ? `${userDetails?.name}`
+                      : `${session?.user?.name}`}
+                  </h1>
                   <span className=" bg-[#ffdd47] p-1 ml-1 rounded-full text-xs text-[#a43232]">
                     {" "}
                     Hero{" "}
@@ -139,7 +159,13 @@ function AcountHeader({ setOpen }) {
                 <p className="max-w-[450px] text-sm text-gray-500">
                   {session?.user?.bio === "0"
                     ? "Add a bio"
-                    : `${session?.user?.bio}`}
+                    : `${
+                        edited
+                          ? `${session?.user?.bio}`
+                          : userDetails
+                          ? `${userDetails?.bio}`
+                          : `${session?.user?.bio}`
+                      }`}
                 </p>
                 <div className="mt-[10px] flex flex-wrap gap-[15px] items-start justify-center">
                   <div className=" border-r-2 p-2">

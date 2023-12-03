@@ -45,7 +45,7 @@ export default function BottemNav() {
     return null;
   }
   return (
-    <div className="fixed bottom-0 w-full  md:hidden z-50">
+    <div className="fixed bottom-0 w-full  lg:hidden z-50">
       <div
         className={`${
           isVisible ? "block" : "hidden"

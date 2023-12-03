@@ -21,8 +21,8 @@ export default function SingleCard({ data }) {
     const userId = session?.user?.id;
     if (data?.likes?.includes(userId)) {
       setLiked(true);
-      setLikes(data?.likes.length);
     }
+    setLikes(data?.likes.length);
   }, [data, session]);
 
   const formattedTime = formatDistanceToNow(new Date(data?.createdAt), {
@@ -149,10 +149,10 @@ export default function SingleCard({ data }) {
           <div className=" flex  text-lg gap-[10px] items-center">
             {/* <h1 className='text-white font-bold text-xl'>Free</h1> */}
             <h1 className="text-[#0295FF] font-bold text-md">Premium</h1>
-            <h1 className="text-[#0295FF] font-bold text-xl">{data?.price}$</h1>
+            <h1 className="text-[#0295FF] font-bold text-xl">Rs.{data?.price}</h1>
           </div>
         )}
-        <div className="flex gap-[20px] items-center">
+        <div className="flex gap-[20px] mt-[10px] items-center">
           {data &&
             session &&
             status === "authenticated" &&

@@ -30,7 +30,7 @@ export async function POST(req) {
         images,
         files,
         tags: newTags,
-        type: "Free",
+        type: type,
         price,
       },
     });

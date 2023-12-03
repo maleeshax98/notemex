@@ -1,196 +1,116 @@
-"use client";
+import React from "react";
 import {
-  Card,
+  Drawer,
+  Button,
   Typography,
-  List,
-  ListItem,
-  ListItemPrefix,
-  ListItemSuffix,
-  Chip,
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-  Alert,
+  IconButton,
 } from "@/Context/ThemeContext/ThemeContext";
-
-import {
-  PresentationChartBarIcon,
-  ShoppingBagIcon,
-  UserCircleIcon,
-  Cog6ToothIcon,
-  InboxIcon,
-  PowerIcon,
-} from "@/Context/ThemeContext/ThemeContext";
-
-import {
-  ChevronRightIcon,
-  ChevronDownIcon,
-  CubeTransparentIcon,
-} from "@/Context/ThemeContext/ThemeContext";
-import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { signOut } from "next-auth/react";
 
-export function Sidebar() {
-  const pathName = usePathname();
-  const [open, setOpen] = useState(0);
-  const [openAlert, setOpenAlert] = useState(true);
-
-  const handleOpen = (value) => {
-    setOpen(open === value ? 0 : value);
-  };
-
+export default function Sidebar({ open, setOpen }) {
+  const openDrawer = () => setOpen(true);
+  const closeDrawer = () => setOpen(false);
   return (
-    <div className="  fixed bg-[#ffffff]  rounded-lg flex flex-col gap-[10px] max-w-[250px] p-4 min-h-screen min-w-[250px] ">
-      <div>
-        <div>
-          <h1 className="font-bold text-xl text-[#0295FF]">NoteMe X</h1>
-          <p className="text-xs text-gray-400">Let&apos;s share knowladge</p>
+    <React.Fragment>
+      {/* <Button onClick={openDrawer}>Open Drawer</Button> */}
+      <Drawer
+        open={open}
+        onClose={closeDrawer}
+        className="p-4 min-h-screen"
+        placement="right"
+      >
+        <div className="mb-6 flex items-center justify-between">
+          <Typography variant="h5" color="blue-gray">
+            NoteMe X
+          </Typography>
+          <IconButton variant="text" color="blue-gray" onClick={closeDrawer}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="h-5 w-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </IconButton>
         </div>
-      </div>
-      <div className="mt-[20px] flex flex-col gap-[20px]">
-        <div
-          className={`flex justify-start items-center gap-[15px] ${
-            pathName === "/acount" ? "bg-[#e8e8e89e] rounded-md p-2" : ""
-          }`}
-        >
-          <Image
-            src={"icons/note.svg"}
-            width={25}
-            height={25}
-            alt="notes"
-            className={`${pathName === "/acount" ? "towhite" : ""}`}
-          />
-          <h1
-            className={`font-semibold text-sm  ${
-              pathName === "/acount" ? "text-[#333333]" : "text-[#a1a1a1]"
-            }`}
-          >
-            My notes
-          </h1>
-        </div>
-        <Link href={"/user/followers"}>
+        <div className="flex cursor-pointer text-gray-900 flex-col font-smibold gap-[10px] rounded-md">
+          <Link href={"/acount"}>
+            <div className="p-2 #border-2 rounded-md flex gap-[10px] items-center">
+              <Image
+                src={"/icons/new/profile.svg"}
+                width={30}
+                height={30}
+                alt="withdraw"
+              />
+
+              <p>My Acount</p>
+            </div>
+          </Link>
+          <hr />
+          <Link href={"/wallet"} onClick={closeDrawer}>
+            <div className="p-2 #border-2 rounded-md flex gap-[10px] items-center">
+              <Image
+                src={"/icons/new/withdraw.svg"}
+                width={30}
+                height={30}
+                alt="withdraw"
+              />
+
+              <p>My Wallet</p>
+            </div>
+          </Link>
+          <hr />
+
+          <div className="p-2 #border-2 rounded-md flex gap-[10px] items-center">
+            <Image
+              src={"/icons/new/money.svg"}
+              width={30}
+              height={30}
+              alt="withdraw"
+            />
+            <p>Withdraw Money</p>
+          </div>
+          <hr />
+          <Link href={"/info/privacy-policy"} onClick={closeDrawer}>
+            <div className="p-2 #border-2 rounded-md flex gap-[10px] items-center">
+              <Image
+                src={"/icons/new/info.svg"}
+                width={30}
+                height={30}
+                alt="withdraw"
+              />
+
+              <p>More Info</p>
+            </div>
+          </Link>
+
+          <hr />
           <div
-            className={`flex justify-start items-center gap-[15px] ${
-              pathName === "/acount/followers"
-                ? "bg-[#000000] rounded-md p-2"
-                : ""
-            }`}
+            className="p-2 #border-2 rounded-md flex gap-[10px] items-center"
+            onClick={() => {
+              signOut();
+            }}
           >
             <Image
-              src={"icons/new/following.svg"}
-              width={25}
-              height={25}
-              alt="notes"
-              className={`${pathName === "/acount/followers" ? "towhite" : ""}`}
+              src={"/icons/new/logout.svg"}
+              width={30}
+              height={30}
+              alt="withdraw"
             />
-            <h1
-              className={`font-semibold text-sm  ${
-                pathName === "/acount/followers"
-                  ? "text-[#000000]"
-                  : "text-[#a1a1a1]"
-              }`}
-            >
-              My followers
-            </h1>
+
+            <p>Logout</p>
           </div>
-        </Link>
-        <div
-          className={`flex justify-start items-center gap-[15px] ${
-            pathName === "/acount/earnings" ? "bg-[#000000] rounded-md p-2" : ""
-          }`}
-        >
-          <Image
-            src={"icons/new/money.svg"}
-            width={25}
-            height={25}
-            alt="notes"
-            className={`${pathName === "/acount/earnings" ? "towhite" : ""}`}
-          />
-          <h1
-            className={`font-semibold text-sm  ${
-              pathName === "/acount/earnings"
-                ? "text-[#000000]"
-                : "text-[#a1a1a1]"
-            }`}
-          >
-            Earnings
-          </h1>
         </div>
-        <div
-          className={`flex justify-start items-center gap-[15px] ${
-            pathName === "/acount/withdrawals"
-              ? "bg-[#000000] rounded-md p-2"
-              : ""
-          }`}
-        >
-          <Image
-            src={"icons/new/withdraw.svg"}
-            width={25}
-            height={25}
-            alt="notes"
-            className={`${pathName === "/acount/withdrawals" ? "towhite" : ""}`}
-          />
-          <h1
-            className={`font-semibold text-sm  ${
-              pathName === "/acount/withdrawals"
-                ? "text-[#000000]"
-                : "text-[#a1a1a1]"
-            }`}
-          >
-            withdrawals
-          </h1>
-        </div>
-        <div
-          className={`flex justify-start items-center gap-[15px] ${
-            pathName === "/acount/purchased"
-              ? "bg-[#000000] rounded-md p-2"
-              : ""
-          }`}
-        >
-          <Image
-            src={"icons/new/purchased.svg"}
-            width={25}
-            height={25}
-            alt="notes"
-            className={`${pathName === "/acount/purchased" ? "towhite" : ""}`}
-          />
-          <h1
-            className={`font-semibold text-sm  ${
-              pathName === "/acount/purchased"
-                ? "text-[#000000]"
-                : "text-[#a1a1a1]"
-            }`}
-          >
-            Purchased notes
-          </h1>
-        </div>
-        <div
-          className={`flex justify-start items-center gap-[15px] cursor-pointer ${
-            pathName === "/acsfdsfount" ? "bg-[#000000] rounded-md p-2" : ""
-          }`}
-          onClick={() => {
-            signOut();
-          }}
-        >
-          <Image
-            src={"icons/new/logout.svg"}
-            width={25}
-            height={25}
-            alt="notes"
-            className={`${pathName === "/acosdfdfunt" ? "towhite" : ""}`}
-          />
-          <h1
-            className={`font-semibold text-sm  ${
-              pathName === "/acosdfsdfunt" ? "text-[#000000]" : "text-[#a1a1a1]"
-            }`}
-          >
-            Logout
-          </h1>
-        </div>
-      </div>
-    </div>
+      </Drawer>
+    </React.Fragment>
   );
 }

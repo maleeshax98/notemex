@@ -110,7 +110,7 @@ export async function GET(req) {
       tagsNotes,
       "id"
     );
-      console.log(matchingNotes)
+
     const allNotes = await prisma.note.findMany({
       take: postsPerPage,
       skip: skip,

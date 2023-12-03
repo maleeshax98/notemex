@@ -8,7 +8,7 @@ import useUpdateUser from "@/hooks/useUpdateUser";
 import ToasterContext from "@/Context/ToastContext/ToastContext";
 import useImageUpload from "@/hooks/useImageUpload";
 import useDpUpload from "@/hooks/useDpUpload";
-export default function AcountEditModel({ open, setOpen }) {
+export default function AcountEditModel({ open, setOpen, setEdited }) {
   const { data: session } = useSession();
   const [query, setQuery] = useState(null);
   // const [loading ,setLoading] = useState(false)
@@ -19,7 +19,11 @@ export default function AcountEditModel({ open, setOpen }) {
   const [coverImage, setCoverImage] = useState(null);
 
   const { uploading, imgURL, handleImgChange } = useImageUpload();
-  const { uploading: uploadingDP, imgURL: dpURL, handleImgChange: handleDpChange } = useDpUpload();
+  const {
+    uploading: uploadingDP,
+    imgURL: dpURL,
+    handleImgChange: handleDpChange,
+  } = useDpUpload();
 
   useEffect(() => {
     if (session?.user?.name) {
@@ -28,11 +32,11 @@ export default function AcountEditModel({ open, setOpen }) {
     if (session?.user?.bio) {
       setBio(session?.user?.bio);
     }
-    if(imgURL){
-      setCoverImage(imgURL)
+    if (imgURL) {
+      setCoverImage(imgURL);
     }
-    if(dpURL){
-      setImage(dpURL)
+    if (dpURL) {
+      setImage(dpURL);
     }
   }, [session, imgURL, dpURL]);
 
@@ -49,7 +53,7 @@ export default function AcountEditModel({ open, setOpen }) {
     await update(name, bio, image, coverImage);
 
     setOpen((prev) => !prev);
-
+    setEdited(true);
   };
 
   if (session?.user) {
@@ -62,9 +66,8 @@ export default function AcountEditModel({ open, setOpen }) {
             <button
               className="bg-red-600 p-2 rounded-full text-white font-semibold text-sm"
               onClick={() => {
-                toast.error("Closed without saving")
+                toast.error("Closed without saving");
                 setOpen((prev) => !prev);
-
               }}
             >
               Close without saving
@@ -80,7 +83,11 @@ export default function AcountEditModel({ open, setOpen }) {
                 fill
                 alt="cover image"
               />
-              <div className={`w-full h-full text-center ${ imgURL ? 'bg-[#0000007a]' : 'bg-[#000000c4]'} absolute z-10`}>
+              <div
+                className={`w-full h-full text-center ${
+                  imgURL ? "bg-[#0000007a]" : "bg-[#000000c4]"
+                } absolute z-10`}
+              >
                 <p className=" font-bold text-white m-[20px]">Change Photo</p>
                 <input
                   type="file"
@@ -134,7 +141,6 @@ export default function AcountEditModel({ open, setOpen }) {
                 {loading || uploading || uploadingDP ? (
                   <button
                     className="p-2 rounded-md bg-blue-300 font-semibold text-center text-white"
-                    
                     disabled
                   >
                     <span className="flex items-center justify-center gap-[10px]">

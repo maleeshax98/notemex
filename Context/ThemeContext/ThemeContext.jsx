@@ -1,23 +1,30 @@
 "use client";
- 
-import { 
-    ThemeProvider, 
-    Textarea, Button, IconButton ,
-    Navbar as NavbarMT,
-    Typography,
-    Input,
-    Badge,
-    Alert,
-    Dialog,
-    Stepper, Step,
-    Tabs,
-    TabsHeader,
-    TabsBody,
-    Tab,
-    TabPanel,
- } from "@material-tailwind/react";
 
- import {
+import {
+  ThemeProvider,
+  Textarea,
+  Button,
+  IconButton,
+  Navbar as NavbarMT,
+  Typography,
+  Input,
+  Badge,
+  Alert,
+  Dialog,
+  Stepper,
+  Step,
+  Tabs,
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+ 
+} from "@material-tailwind/react";
+
+import {
   Card,
   List,
   ListItem,
@@ -27,7 +34,7 @@ import {
   Accordion,
   AccordionHeader,
   AccordionBody,
-  Drawer
+  Drawer,
 } from "@material-tailwind/react";
 
 import {
@@ -45,61 +52,59 @@ import {
   CubeTransparentIcon,
 } from "@heroicons/react/24/outline";
 
- import {
+import {
   CogIcon,
   UserIcon,
   BuildingLibraryIcon,
-  
 } from "@heroicons/react/24/outline";
 
 //  import { BellIcon, Cog6ToothIcon } from "@heroicons/react/24/solid";
- export { 
-    ThemeProvider, 
-    Textarea, Button, IconButton,
-    NavbarMT,
-    Typography,
-    Input,
-    Badge,
-    Alert,
-    Dialog,
-    Stepper, Step,
-    CogIcon,
-    UserIcon,
-    BuildingLibraryIcon,
-    Tabs,
-    TabsHeader,
-    TabsBody,
-    Tab,
-    TabPanel,
-    Card,
-    List,
-    ListItem,
-    ListItemPrefix,
-    ListItemSuffix,
-    Chip,
-    Accordion,
-    AccordionHeader,
-    AccordionBody,
-    PresentationChartBarIcon,
-    ShoppingBagIcon,
-    UserCircleIcon,
-    Cog6ToothIcon,
-    InboxIcon,
-    PowerIcon,
-    ChevronRightIcon,
-    ChevronDownIcon,
-    CubeTransparentIcon,
-    Drawer
-    // BellIcon, Cog6ToothIcon 
+export {
+  ThemeProvider,
+  Textarea,
+  Button,
+  IconButton,
+  NavbarMT,
+  Typography,
+  Input,
+  Badge,
+  Alert,
+  Dialog,
+  Stepper,
+  Step,
+  CogIcon,
+  UserIcon,
+  BuildingLibraryIcon,
+  Tabs,
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
+  Card,
+  List,
+  ListItem,
+  ListItemPrefix,
+  ListItemSuffix,
+  Chip,
+  Accordion,
+  AccordionHeader,
+  AccordionBody,
+  PresentationChartBarIcon,
+  ShoppingBagIcon,
+  UserCircleIcon,
+  Cog6ToothIcon,
+  InboxIcon,
+  PowerIcon,
+  ChevronRightIcon,
+  ChevronDownIcon,
+  CubeTransparentIcon,
+  Drawer,
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+  // BellIcon, Cog6ToothIcon
 };
 
- 
- export default function ThemeContext({ children }) {
-   return (
-        <ThemeProvider>
-            { children }
-        </ThemeProvider>
-   )
- }
- 
-
+export default function ThemeContext({ children }) {
+  return <ThemeProvider>{children}</ThemeProvider>;
+}
