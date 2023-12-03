@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-export default function libs() {
+export default function Libs() {
   const [data, setData] = useState([]);
 
   async function check(id) {

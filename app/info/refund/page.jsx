@@ -38,7 +38,7 @@ function Refund() {
               support.notemex@gmail.com
             </a>
             . We will promptly investigate and address any technical issues to
-            ensure you receive the notes you've purchased.
+            ensure you receive the notes you&quot;ve purchased.
           </p>
 
           <h2 className="text-2xl font-bold mb-4">Unauthorized Purchases:</h2>
@@ -54,7 +54,7 @@ function Refund() {
           <p className="mb-6">
             Note creators may choose to remove their notes from Notemex at any
             time. If a note you have purchased becomes unavailable due to the
-            creator's action, you may contact our support team for assistance.
+            creator&quot;s action, you may contact our support team for assistance.
           </p>
 
           <h2 className="text-2xl font-bold mb-4">Contact Us:</h2>

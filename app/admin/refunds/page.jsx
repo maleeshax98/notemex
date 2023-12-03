@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import libs from "./libs/libs";
+import Libs from "./libs/libs";
 import {
   Accordion,
   AccordionHeader,
@@ -8,7 +8,7 @@ import {
 } from "@/Context/ThemeContext/ThemeContext";
 
 export default function Refunds() {
-  const { check, get, data, approve, reject } = libs();
+  const { check, get, data, approve, reject } = Libs();
   const [open, setOpen] = useState(1);
   const [type, setType] = useState("PENDING");
   const [filterdData, setFilteredData] = useState([]);

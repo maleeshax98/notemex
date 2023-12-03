@@ -6,6 +6,8 @@ import ThemeContext from "@/Context/ThemeContext/ThemeContext";
 import AuthProvider from "@/Context/AuthContext/AuthContext";
 import ToasterContext from "@/Context/ToastContext/ToastContext";
 import QueryContextProvider from "@/Context/QueryContext/QueryContext";
+import Script from 'next/script'
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -38,7 +40,7 @@ export default function RootLayout({ children }) {
             </ThemeContext>
           </QueryContextProvider>
         </AuthProvider>
-        <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
+        <Script  type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></Script >
       </body>
     </html>
   );

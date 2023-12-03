@@ -80,7 +80,7 @@ export default function PrivacyPolicy() {
           </h2>
           <p className="mb-6">
             We reserve the right to update this Privacy Policy. Changes will be
-            posted on this page with a revised "last updated" date.
+            posted on this page with a revised &quot;last updated&quot; date.
           </p>
 
           <h2 className="text-2xl font-bold mb-4">Contact Us:</h2>

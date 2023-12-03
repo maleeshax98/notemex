@@ -48,7 +48,7 @@ export default function PayButton({ noteId }) {
         merchant_id: `${process.env.NEXT_PUBLIC_MID}`, // Replace your Merchant ID
         return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/`, // Important
         cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/`, // Important
-        notify_url: `https://d6ac-2402-4000-2200-d619-6445-cb89-4eb3-610a.ngrok-free.app/api/pay/notify`,
+        notify_url: `https://caac-2402-4000-2200-d619-6445-cb89-4eb3-610a.ngrok-free.app/api/pay/notify`,
         // notify_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/pay/notify`,
         order_id: data.order_id,
         items: data.title,
@@ -105,7 +105,7 @@ export default function PayButton({ noteId }) {
                 </button>
                 <div>
                   <p className="font-bold text-red-600 text-xl">
-                    Don't close the window
+                    Don&apos;t close the window
                   </p>
                   <Image
                     src={"/icons/new/loadingnew.svg"}
