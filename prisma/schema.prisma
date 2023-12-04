@@ -71,7 +71,7 @@ model Note {
   files    String[] @default([]) @map("files")
   tags     String[] @default([]) @map("tags")
   price    Int      @default(0)
-  approved Approved @default(PENDING)
+  approved Approved @default(APPROVED)
 
   likes String[] @default([]) @map("likes") @db.ObjectId
 
