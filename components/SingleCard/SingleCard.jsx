@@ -25,6 +25,7 @@ export default function SingleCard({ data }) {
       setLiked(true);
     }
     setLikes(data?.likes.length);
+
   }, [data, session]);
 
   const formattedTime = formatDistanceToNow(new Date(data?.createdAt), {

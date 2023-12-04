@@ -98,7 +98,6 @@ body {
   right: -20px; /* Adjust the right position to control the vanishing effect */
 }
 
-
 /* CustomModel.css */
 .custom-model-container {
   width: 80vw;
@@ -108,3 +107,4 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
