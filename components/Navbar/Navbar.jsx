@@ -272,7 +272,7 @@ export default function Navbar() {
                       height={20}
                       className="h-6 w-6"
                     />
-                    Continue with Google
+                    Sign In
                   </Button>
                 </div>
               )}
