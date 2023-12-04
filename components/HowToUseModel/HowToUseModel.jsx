@@ -43,7 +43,7 @@ export default function HowToUseModel() {
               }}
               className="font-semibold p-2 px-2 rounded-md bg-white border-2 outline-none shadow-sm hover:shadow-md text-gray-700 text-sm"
             >
-              Dont Show Again
+              Don{"'"}t Show Again
             </button>
           </div>
         </div>
@@ -65,7 +65,7 @@ export default function HowToUseModel() {
         </div>
         <Link href={"https://www.youtube.com/embed/bPtqd17YD74"}>
           <button className="font-semibold m-[10px] p-2 px-2 rounded-md bg-red-600  outline-none shadow-sm hover:shadow-md text-white text-sm">
-            Wtach The Video on YouTube
+            Watch The Video on YouTube
           </button>
         </Link>
       </Dialog>
