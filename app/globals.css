@@ -17,8 +17,8 @@
 }
 
 body {
-  touch-action: manipulation; /* 'manipulation' is recommended for better performance */
-  user-select: none;
+  touch-action: manipulation;
+  /* user-select: none; */
   max-width: 1280px;
   margin: 0 auto;
   scroll-behavior: smooth;
@@ -26,7 +26,7 @@ body {
 }
 * {
   touch-action: manipulation; /* 'manipulation' is recommended for better performance */
-  user-select: none;
+  /* user-select: none; */
 }
 * {
   -webkit-tap-highlight-color: transparent;
@@ -76,6 +76,9 @@ body {
   height: 5px;
 }
 
+*::-webkit-scrollbar {
+  height: 5px;
+}
 
 .userList::before,
 .userList::after {
@@ -94,3 +97,14 @@ body {
 .userList::after {
   right: -20px; /* Adjust the right position to control the vanishing effect */
 }
+
+/* CustomModel.css */
+.custom-model-container {
+  width: 80vw;
+  height: 80vh;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+

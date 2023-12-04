@@ -12,17 +12,14 @@ export async function middleware(req) {
   const { pathname } = req.nextUrl;
 
   const dynamicRouteMatch = pathname.match(/^\/notes\/(\d+)/);
-  // console.log(pathname)
-  // console.log(dynamicRouteMatch)
 
   const token = await getToken({ req });
-  // console.log("Token middleware", token)
 
   if (
-    pathname.startsWith("/_next") || // exclude Next.js internals
-    pathname.startsWith("/api") || //  exclude all API routes
-    pathname.startsWith("/static") || // exclude static files
-    PUBLIC_FILE.test(pathname) // exclude all files in the public folder
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.startsWith("/static") ||
+    PUBLIC_FILE.test(pathname)
   )
     return NextResponse.next();
 
@@ -32,15 +29,27 @@ export async function middleware(req) {
 
   if (!token) {
     if (!dynamicRouteMatch) {
-      if (req.nextUrl.pathname !== "/signin") {
-        return NextResponse.redirect(new URL("/signin", req.url));
+      if(req.nextUrl.pathname !== "/"){
+        if (req.nextUrl.pathname !== "/signin") {
+          return NextResponse.redirect(new URL("/signin", req.url));
+        }
       }
     }
   }
 
   if (token) {
+    if (req.nextUrl.pathname.startsWith("/admin")) {
+      if (token.role !== "ADMIN") {
+        return NextResponse.redirect(new URL("/", req.url));
+      }
+    }
     if (req.nextUrl.pathname === "/signin") {
       return NextResponse.redirect(new URL("/", req.url));
+    }
+    if (req.nextUrl.pathname.startsWith("/api/admin")) {
+      if (token.role !== "ADMIN") {
+        return NextResponse.redirect(new URL("/", req.url));
+      }
     }
   }
 }

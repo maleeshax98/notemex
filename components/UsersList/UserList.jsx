@@ -23,10 +23,12 @@ export default function UserList() {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center m-10 gap-[10px] p-10  max-w-[1280px]">
+
+    <div className="flex flex-col justify-center m-10 gap-[10px] p-10 max-w-[1200px]">
         <p className="text-sm text-gray-500">Here are some recent users </p>
 
-      <div className="userList flex gap-[15px] w-[80vw] p-2 justify-center overflow-x-auto max-w-[1280px]">
+      <div className="userList flex gap-[15px] w-[80vw] p-2 justify-center overflow-x-auto  max-w-[1200px]">
+
         {users.map((u) => (
           <div className="user flex items-center justify-start gap-[5px]" key={u.id}>
             <div className="min-w-[40px] min-h-[40px] overflow-hidden relative rounded-full">

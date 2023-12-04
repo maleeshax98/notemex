@@ -38,8 +38,11 @@ model User {
   image         String?
   bio           String?   @default("0")
   coverImage    String?   @default("https://www.linearity.io/blog/content/images/2022/03/611b830385d20348a9809a8e_Cover-Album-Covers--1-.png")
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  wallet        Int       @default(0)
+  role          Role      @default(USER)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   searches String[] @default([]) @map("searches")
   tags     String[] @default([]) @map("tags")
@@ -50,8 +53,12 @@ model User {
   UserNoteLikes UserNoteLike[]
   Notifications Notifications[]
 
-  following     String[]        @db.ObjectId
-  followers     String[]        @db.ObjectId
+  following   String[]      @db.ObjectId
+  followers   String[]      @db.ObjectId
+  Orders      Orders[]
+  Withdrawals Withdrawals[]
+  Refund      Refund[]
+  Saved       Saved[]
 }
 
 model Note {
@@ -68,11 +75,15 @@ model Note {
 
   likes String[] @default([]) @map("likes") @db.ObjectId
 
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   comments      Comments[]
   userNotes     UserNote[]
   UserNoteLikes UserNoteLike[]
+  Orders        Orders[]
+  Refund        Refund[]
+  Saved         Saved[]
 }
 
 model UserNote {
@@ -114,13 +125,13 @@ model UserNoteLike {
 }
 
 model Notifications {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @db.ObjectId
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String @db.ObjectId
   notifications Json[]
-  
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user   User   @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 enum Role {
@@ -131,4 +142,75 @@ enum Role {
 enum Approved {
   APPROVED
   PENDING
+}
+
+model Orders {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  status        String? @default("PENDING")
+  amount        Int?
+  addedToWallet Boolean @default(false)
+
+  noteId String @db.ObjectId
+  userId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  note Note @relation(fields: [noteId], references: [id])
+}
+
+model Withdrawals {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  status            String? @default("PENDING")
+  amount            Int?
+  removedFromWallet Boolean @default(false)
+
+  acountName   String
+  acountNumber String
+  bankName     String
+  email        String
+  phoneNum     String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Refund {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  status        String? @default("PENDING")
+  amount        Int?
+  addedToWallet Boolean @default(false)
+
+  orderId String @db.ObjectId
+
+  noteId String @db.ObjectId
+  userId String @db.ObjectId
+
+  acountName   String
+  acountNumber String
+  bankName     String
+  email        String
+  phoneNum     String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  note Note @relation(fields: [noteId], references: [id])
+}
+
+model Saved {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  noteId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  note Note @relation(fields: [noteId], references: [id])
 }

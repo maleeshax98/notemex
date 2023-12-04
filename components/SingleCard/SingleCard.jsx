@@ -9,20 +9,23 @@ import useLike from "@/hooks/useLike";
 import useGetLikes from "@/hooks/useGetLikes";
 import { useSession } from "next-auth/react";
 import useDeleteNote from "@/hooks/useDeleteNote";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import useSave from "@/hooks/useSave";
 
 export default function SingleCard({ data }) {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
   const { data: session, status } = useSession();
+  const { save } = useSave();
   const pathName = usePathname();
-
+  const router = useRouter()
   useEffect(() => {
     const userId = session?.user?.id;
     if (data?.likes?.includes(userId)) {
       setLiked(true);
     }
-      setLikes(data?.likes.length);
+    setLikes(data?.likes.length);
+
   }, [data, session]);
 
   const formattedTime = formatDistanceToNow(new Date(data?.createdAt), {
@@ -149,10 +152,12 @@ export default function SingleCard({ data }) {
           <div className=" flex  text-lg gap-[10px] items-center">
             {/* <h1 className='text-white font-bold text-xl'>Free</h1> */}
             <h1 className="text-[#0295FF] font-bold text-md">Premium</h1>
-            <h1 className="text-[#0295FF] font-bold text-xl">{data?.price}$</h1>
+            <h1 className="text-[#0295FF] font-bold text-xl">
+              Rs.{data?.price}
+            </h1>
           </div>
         )}
-        <div className="flex gap-[20px] items-center">
+        <div className="flex gap-[20px] mt-[10px] items-center">
           {data &&
             session &&
             status === "authenticated" &&
@@ -211,6 +216,25 @@ export default function SingleCard({ data }) {
               alt=""
             />
           </Link>
+          { status === "authenticated" ? (<Image
+            src="/icons/new/save.svg"
+            className="w-[20px] h-[20px] cursor-pointer"
+            width={20}
+            height={20}
+            alt=""
+            onClick={() => {
+              save(data?.id);
+            }}
+          />) : (<Image
+            src="/icons/new/save.svg"
+            className="w-[20px] h-[20px] cursor-pointer"
+            width={20}
+            height={20}
+            alt=""
+            onClick={() => {
+              router.push("/signin")
+            }}
+          />)}
           {data?.userNotes && (
             <>
               {session?.user?.id === data?.userNotes[0]?.user?.id && (

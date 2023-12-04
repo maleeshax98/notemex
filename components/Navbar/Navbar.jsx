@@ -1,5 +1,5 @@
 "use client";
-import { NavbarMT, Badge } from "@/Context/ThemeContext/ThemeContext";
+import { Badge } from "@/Context/ThemeContext/ThemeContext";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -8,11 +8,13 @@ import { useSession } from "next-auth/react";
 import { Button } from "@/Context/ThemeContext/ThemeContext";
 import Link from "next/link";
 import Notification from "../Notification/Notification";
+import Sidebar from "../Sidebar/Sidebar";
 
 export default function Navbar() {
   const pathName = usePathname();
   const [open, setOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [openSideBar, setOpenSideBar] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,7 +91,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="hidden md:flex gap-[60px] items-center justify-center ">
+          <div className="hidden lg:flex gap-[60px] items-center justify-center ">
             <div>
               <Link href={"/"}>
                 <div className="text-center">
@@ -186,26 +188,26 @@ export default function Navbar() {
               </Link>
             </div>
             <div>
-              <div className="text-center">
-                <div
-                  className={` ${
-                    pathName === "/beta/shorts"
-                      ? "bg-[#eaeaeade] p-2 rounded-lg"
-                      : ""
-                  }`}
-                >
-                  <Image
-                    src={"/icons/new/shorts.svg"}
-                    className={`${
-                      pathName === "/beta/shorts" ? "towhite" : ""
+              <Link href={"/saved"}>
+                <div className="text-center">
+                  <div
+                    className={` ${
+                      pathName === "/saved"
+                        ? "bg-[#eaeaeade] p-2 rounded-lg"
+                        : ""
                     }`}
-                    alt="Home Icon"
-                    width={35}
-                    height={35}
-                  />
+                  >
+                    <Image
+                      src={"/icons/new/saved.svg"}
+                      className={`${pathName === "/saved" ? "towhite" : ""}`}
+                      alt="Home Icon"
+                      width={35}
+                      height={35}
+                    />
+                  </div>
+                  <h1 className="text-gray-400 text-xs">Saved</h1>
                 </div>
-                <h1 className="text-gray-400 text-xs">Shorts</h1>
-              </div>
+              </Link>
             </div>
           </div>
 
@@ -222,20 +224,35 @@ export default function Navbar() {
                 height={35}
               />
               <div>
-                 {session && status === "authenticated" && <Notification />  }
+                {session && status === "authenticated" && <Notification />}
               </div>
+              <Sidebar open={openSideBar} setOpen={setOpenSideBar} />
+              {/* <Image
+                  src="/icons/new/menu.svg"
+                  className=" cursor-pointer"
+                  alt=""
+                  width={30}
+                  height={35}
+                  onClick={() => {
+                    setOpenSideBar((prev) => !prev);
+                  }}
+                /> */}
+
               {session && status === "authenticated" ? (
-                <Link href={"/acount"}>
-                  <div className="rounded-full w-[50px] h-[50px] overflow-hidden relative">
-                    <Image
-                      src={session?.user?.image}
-                      className="object-cover w-full h-full"
-                      fill
-                      alt=""
-                    />
-                  </div>
-                </Link>
-              ) : !session && status === "loading" ? (
+                // <Link href={"/acount"}>
+                <div className="rounded-full w-[50px] h-[50px] overflow-hidden relative">
+                  <Image
+                    src={session?.user?.image}
+                    className="object-cover w-full h-full cursor-pointer"
+                    fill
+                    alt=""
+                    onClick={() => {
+                      setOpenSideBar((prev) => !prev);
+                    }}
+                  />
+                </div>
+              ) : // </Link>
+              !session && status === "loading" ? (
                 <div></div>
               ) : (
                 <div>
@@ -251,6 +268,8 @@ export default function Navbar() {
                     <Image
                       src="/icons/google.svg"
                       alt="metamask"
+                      width={20}
+                      height={20}
                       className="h-6 w-6"
                     />
                     Continue with Google

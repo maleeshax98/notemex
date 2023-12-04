@@ -29,9 +29,11 @@ export default function Following() {
 
   return (
     <div className="">
-      {data.map((doc) => (
-        <FollowingCard data={doc}  key={doc.id}/>
-      ))}
+      <div className="flex flex-col items-start justify-start gap-[10px]">
+        {data.map((doc) => (
+          <FollowingCard data={doc} key={doc.id} />
+        ))}
+      </div>
       {loaded && !loading && !hasMore && (
         <div className="m-[20px]">
           <center>
