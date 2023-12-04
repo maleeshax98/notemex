@@ -275,7 +275,7 @@ export default function Add() {
     }
   };
 
-  const { loading, add } = useAddNote();
+  const { loading, add, success, data: successData } = useAddNote();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -318,7 +318,7 @@ export default function Add() {
       return;
     }
 
-    if(type === "Pro" && intPrice < 50){
+    if (type === "Pro" && intPrice < 50) {
       toast.error("Minimum price is Rs.50 ", toastStyles);
       setActiveStep(4);
       return;
@@ -326,6 +326,56 @@ export default function Add() {
 
     await add(title, content, imgArr, tags, filesArr, desc, type, intPrice);
   };
+
+  if (success) {
+    toast.success("Successfully added");
+    const copy = (value) => {
+      navigator.clipboard.writeText(value);
+      toast.success("Link copied to clipboard");
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000)
+    };
+    if (successData) {
+      return (
+        <div>
+          <center>
+            <div>
+              <div>
+                <div>
+                  <Image
+                    src={"/added.png"}
+                    width={100}
+                    height={100}
+                    alt="Added"
+                  />
+                </div>
+                <h1 className="text-2xl font-bold ">Share your note</h1>
+                <p className="text-sm text-gray-500">
+                  Share your note and get viewers.
+                </p>
+              </div>
+              <div className="flex flex-wrap mt-[20px] justify-center items-center gap-[15px]">
+                <div className="p-2 rounded-full bg-gray-200 font-semibold text-sm">
+                  {`${process.env.NEXT_PUBLIC_BASE_URL}/notes/${successData?.id}`}
+                </div>
+                <button
+                  className="font-semibold p-2 rounded-full bg-blue-600 text-white"
+                  onClick={() => {
+                    copy(
+                      `${process.env.NEXT_PUBLIC_BASE_URL}/notes/${successData?.id}`
+                    );
+                  }}
+                >
+                  Share Now
+                </button>
+              </div>
+            </div>
+          </center>
+        </div>
+      );
+    }
+  }
 
   if (!type) {
     return (
@@ -430,7 +480,7 @@ export default function Add() {
             <div className=" p-4 ">
               <div>
                 <p className="font-semibold text-sm  text-gray-600">
-                  Add search tags 
+                  Add search tags
                 </p>
                 <p className="text-xs ">( you can skip )</p>
 
@@ -461,23 +511,23 @@ export default function Add() {
                   <div className="flex flex-wrap mt-[10px] gap-[500px] mb-[10px]">
                     <div>
                       {tagError && <p className="text-red-600">{tagError}</p>}
-                     <div className="flex flex-wrap items-center gap-[20px]">
-                     <input
-                        className={`${
-                          tagError ? "border-red-600 w-auto" : ""
-                        } p-[5px] outline-none border-2 rounded-md w-auto`}
-                        type="text"
-                        onChange={(e) => setNewTag(e.target.value)}
-                        value={newTag}
-                        ref={tagField}
-                      />
-                      <button
-                        className="rounded-lg px-4 py-2 text-white bg-black ml-[5px]"
-                        onClick={handleAddTag}
-                      >
-                        Add
-                      </button>
-                     </div>
+                      <div className="flex flex-wrap items-center gap-[20px]">
+                        <input
+                          className={`${
+                            tagError ? "border-red-600 w-auto" : ""
+                          } p-[5px] outline-none border-2 rounded-md w-auto`}
+                          type="text"
+                          onChange={(e) => setNewTag(e.target.value)}
+                          value={newTag}
+                          ref={tagField}
+                        />
+                        <button
+                          className="rounded-lg px-4 py-2 text-white bg-black ml-[5px]"
+                          onClick={handleAddTag}
+                        >
+                          Add
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

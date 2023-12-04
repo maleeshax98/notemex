@@ -42,12 +42,9 @@ export async function POST(req) {
       },
     });
 
-    console.log(ok)
+    console.log(ok);
 
-    return NextResponse.json(
-      { post: "Note added successfully" },
-      { status: 200 }
-    );
+    return NextResponse.json({ post: newNote }, { status: 200 });
   } catch (err) {
     console.log(err);
     return NextResponse.json({ error: "Somthing went wrong" }, { status: 500 });

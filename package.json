@@ -32,6 +32,7 @@
     "react-modal-image": "^2.6.0",
     "react-modal-image-responsive": "^1.2.0",
     "react-query": "^3.39.3",
+    "react-refresh-control": "^2.0.5",
     "react-select": "^5.8.0",
     "react-select-country-list": "^2.2.3",
     "react-webcam": "^7.2.0"
