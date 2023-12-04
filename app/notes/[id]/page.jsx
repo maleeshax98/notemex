@@ -32,7 +32,6 @@ export default function PostPage({ params }) {
     }
     setLikes(data?.likes.length);
 
-
     if (data?.title || data?.tags) {
       update(
         data?.title
@@ -60,11 +59,16 @@ export default function PostPage({ params }) {
   const { like } = useLike();
 
   if (error) {
+    if(error === 'Signing in is required to view'){
+      setTimeout(() => {
+        route.push("/signin")
+      }, 1000)
+    }
     return (
       <div>
         <div className="m-[20px]">
           <center>
-            <p className=" text-red-500 text-lg"> {error} </p>
+            <p className=" text-red-500 text-xl font-bold"> {error} </p>
           </center>
         </div>
       </div>
@@ -138,6 +142,7 @@ export default function PostPage({ params }) {
           </h1>
         </div>
         <div className="m-[20px]">
+          
           {data?.type === "Free" ? (
             <div className="mt-[0px] mb-[50px] p-2">
               <div className="mb-[15px] flex gap-[10px] flex-wrap justify-center">
@@ -161,7 +166,7 @@ export default function PostPage({ params }) {
                         key={file}
                         className="flex justify-center items-center flex-wrap gap-[10px]"
                       >
-                        <Link href={file} >
+                        <Link href={file}>
                           <button className="p-2 rounded-md text-white font-semibold text-center bg-blue-700">
                             Download File {index + 1}
                           </button>
@@ -202,7 +207,7 @@ export default function PostPage({ params }) {
                               key={file}
                               className="flex justify-center items-center flex-wrap gap-[10px]"
                             >
-                              <Link href={file} >
+                              <Link href={file}>
                                 <button className="p-2 rounded-md text-white font-semibold text-center bg-blue-700">
                                   Download File {index + 1}
                                 </button>
@@ -241,7 +246,7 @@ export default function PostPage({ params }) {
                             key={file}
                             className="flex justify-center items-center flex-wrap gap-[10px]"
                           >
-                            <Link href={file} >
+                            <Link href={file}>
                               <button className="p-2 rounded-md text-white font-semibold text-center bg-blue-700">
                                 Download File {index + 1}
                               </button>
@@ -260,11 +265,18 @@ export default function PostPage({ params }) {
                 <div>
                   <center>
                     <p className="">{data?.desc}</p>
-                    <Link href={"#comments"}>
-                      <p className="mt-[10px] text-blue-600 cursor-pointer">
-                        Reviews
-                      </p>
-                    </Link>
+                    <div className="flex gap-[10px]">
+                      <Link href={"#comments"}>
+                        <p className="mt-[10px] text-blue-600 cursor-pointer">
+                          Reviews
+                        </p>
+                      </Link>
+                      <Link href="/info/refund">
+                        <p className="mt-[10px] text-blue-600 cursor-pointer">
+                          Reufund policy & Terms and conditions
+                        </p>
+                      </Link>
+                    </div>
                     <div className="flex justify-center mt-[10px] border-2 shadow-sm p-4 rounded-lg">
                       <div className="text-left">
                         <p className="font-bold text-2xl text-gray-800">

@@ -29,8 +29,10 @@ export async function middleware(req) {
 
   if (!token) {
     if (!dynamicRouteMatch) {
-      if (req.nextUrl.pathname !== "/signin") {
-        return NextResponse.redirect(new URL("/signin", req.url));
+      if(req.nextUrl.pathname !== "/"){
+        if (req.nextUrl.pathname !== "/signin") {
+          return NextResponse.redirect(new URL("/signin", req.url));
+        }
       }
     }
   }

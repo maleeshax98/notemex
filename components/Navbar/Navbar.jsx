@@ -1,7 +1,5 @@
 "use client";
-import {
-  Badge,
-} from "@/Context/ThemeContext/ThemeContext";
+import { Badge } from "@/Context/ThemeContext/ThemeContext";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -190,26 +188,26 @@ export default function Navbar() {
               </Link>
             </div>
             <div>
-              <div className="text-center">
-                <div
-                  className={` ${
-                    pathName === "/beta/shorts"
-                      ? "bg-[#eaeaeade] p-2 rounded-lg"
-                      : ""
-                  }`}
-                >
-                  <Image
-                    src={"/icons/new/shorts.svg"}
-                    className={`${
-                      pathName === "/beta/shorts" ? "towhite" : ""
+              <Link href={"/saved"}>
+                <div className="text-center">
+                  <div
+                    className={` ${
+                      pathName === "/saved"
+                        ? "bg-[#eaeaeade] p-2 rounded-lg"
+                        : ""
                     }`}
-                    alt="Home Icon"
-                    width={35}
-                    height={35}
-                  />
+                  >
+                    <Image
+                      src={"/icons/new/saved.svg"}
+                      className={`${pathName === "/saved" ? "towhite" : ""}`}
+                      alt="Home Icon"
+                      width={35}
+                      height={35}
+                    />
+                  </div>
+                  <h1 className="text-gray-400 text-xs">Saved</h1>
                 </div>
-                <h1 className="text-gray-400 text-xs">Shorts</h1>
-              </div>
+              </Link>
             </div>
           </div>
 
@@ -228,8 +226,8 @@ export default function Navbar() {
               <div>
                 {session && status === "authenticated" && <Notification />}
               </div>
-                <Sidebar open={openSideBar} setOpen={setOpenSideBar} />
-                {/* <Image
+              <Sidebar open={openSideBar} setOpen={setOpenSideBar} />
+              {/* <Image
                   src="/icons/new/menu.svg"
                   className=" cursor-pointer"
                   alt=""
@@ -239,22 +237,22 @@ export default function Navbar() {
                     setOpenSideBar((prev) => !prev);
                   }}
                 /> */}
-                
+
               {session && status === "authenticated" ? (
                 // <Link href={"/acount"}>
-                  <div className="rounded-full w-[50px] h-[50px] overflow-hidden relative">
-                    <Image
-                      src={session?.user?.image}
-                      className="object-cover w-full h-full cursor-pointer"
-                      fill
-                      alt=""
-                      onClick={() => {
-                        setOpenSideBar((prev) => !prev);
-                      }}
-                    />
-                  </div>
-                // </Link>
-              ) : !session && status === "loading" ? (
+                <div className="rounded-full w-[50px] h-[50px] overflow-hidden relative">
+                  <Image
+                    src={session?.user?.image}
+                    className="object-cover w-full h-full cursor-pointer"
+                    fill
+                    alt=""
+                    onClick={() => {
+                      setOpenSideBar((prev) => !prev);
+                    }}
+                  />
+                </div>
+              ) : // </Link>
+              !session && status === "loading" ? (
                 <div></div>
               ) : (
                 <div>

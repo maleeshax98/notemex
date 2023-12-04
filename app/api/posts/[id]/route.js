@@ -35,9 +35,14 @@ export async function GET(req, { params }) {
 
       if (!session) {
         return NextResponse.json(
-          { error: "Unauthorized Request" },
+          { error: "Signing in is required to view" },
           { status: 500 }
         );
+
+        // return NextResponse.json(
+        //   { post: { type:} },
+        //   { status: 200 }
+        // );
       }
       
       if (session?.user?.id === getPost.userNotes[0]?.user?.id) {

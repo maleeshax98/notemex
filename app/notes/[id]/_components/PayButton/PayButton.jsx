@@ -48,7 +48,7 @@ export default function PayButton({ noteId }) {
         merchant_id: `${process.env.NEXT_PUBLIC_MID}`, // Replace your Merchant ID
         return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/`, // Important
         cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/`, // Important
-        notify_url: `https://caac-2402-4000-2200-d619-6445-cb89-4eb3-610a.ngrok-free.app/api/pay/notify`,
+        notify_url: `https://f7ff-2402-4000-2180-153d-f9c6-d512-15ed-3391.ngrok-free.app/api/pay/notify`,
         // notify_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/pay/notify`,
         order_id: data.order_id,
         items: data.title,
@@ -70,7 +70,7 @@ export default function PayButton({ noteId }) {
         toast.success("Payment successed - " + orderId);
         setLoading(false);
         setOpen(false);
-        window.location.reload()
+        window.location.reload();
       };
 
       payhere.onError = function onError(error) {

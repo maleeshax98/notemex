@@ -58,6 +58,7 @@ model User {
   Orders      Orders[]
   Withdrawals Withdrawals[]
   Refund      Refund[]
+  Saved       Saved[]
 }
 
 model Note {
@@ -82,6 +83,7 @@ model Note {
   UserNoteLikes UserNoteLike[]
   Orders        Orders[]
   Refund        Refund[]
+  Saved         Saved[]
 }
 
 model UserNote {
@@ -193,6 +195,18 @@ model Refund {
   bankName     String
   email        String
   phoneNum     String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  note Note @relation(fields: [noteId], references: [id])
+}
+
+model Saved {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  noteId String @db.ObjectId
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

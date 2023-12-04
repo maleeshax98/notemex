@@ -143,26 +143,30 @@ export default function BottemNav() {
                         height={35}
                       />
                     </div>
-                    <h1 className="text-gray-400 text-xs">Skills</h1>
+                    <h1 className="text-gray-400 text-xs">Community</h1>
                   </div>
                 </Link>
               </div>
               <div>
-                <div className="text-center">
-                  <div
-                    className={` ${
-                      pathName === "/" ? "bg-[#ededed30] p-2 rounded-lg" : ""
-                    }`}
-                  >
-                    <Image
-                      src={"/icons/new/shorts.svg"}
-                      alt="Home Icon"
-                      width={35}
-                      height={35}
-                    />
+                <Link href="/saved">
+                  <div className="text-center">
+                    <div
+                      className={` ${
+                        pathName === "/saved"
+                          ? "bg-[#ededed30] p-2 rounded-lg"
+                          : ""
+                      }`}
+                    >
+                      <Image
+                        src={"/icons/new/saved.svg"}
+                        alt="Home Icon"
+                        width={35}
+                        height={35}
+                      />
+                    </div>
+                    <h1 className="text-gray-400 text-xs mt-[10px]">Saved</h1>
                   </div>
-                  <h1 className="text-gray-400 text-xs">Shorts</h1>
-                </div>
+                </Link>
               </div>
             </div>
           </div>

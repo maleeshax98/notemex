@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Drawer,
@@ -7,11 +8,12 @@ import {
 } from "@/Context/ThemeContext/ThemeContext";
 import Image from "next/image";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Sidebar({ open, setOpen }) {
   const openDrawer = () => setOpen(true);
   const closeDrawer = () => setOpen(false);
+  const { status } = useSession();
   return (
     <React.Fragment>
       {/* <Button onClick={openDrawer}>Open Drawer</Button> */}
@@ -94,21 +96,44 @@ export default function Sidebar({ open, setOpen }) {
           </Link>
 
           <hr />
-          <div
-            className="p-2 #border-2 rounded-md flex gap-[10px] items-center"
-            onClick={() => {
-              signOut();
-            }}
-          >
-            <Image
-              src={"/icons/new/logout.svg"}
-              width={30}
-              height={30}
-              alt="withdraw"
-            />
+          {status === "authenticated" ? (
+            <div
+              className="p-2 #border-2 rounded-md flex gap-[10px] items-center"
+              onClick={() => {
+                signOut();
+              }}
+            >
+              <Image
+                src={"/icons/new/logout.svg"}
+                width={30}
+                height={30}
+                alt="withdraw"
+              />
 
-            <p>Logout</p>
-          </div>
+              <p>Logout</p>
+            </div>
+          ) : (
+            <div>
+              <Button
+                size="lg"
+                variant="outlined"
+                color="blue-gray"
+                className="flex items-center gap-3 p-2"
+                onClick={() => {
+                  route.push("/signin");
+                }}
+              >
+                <Image
+                  src="/icons/google.svg"
+                  alt="metamask"
+                  width={20}
+                  height={20}
+                  className="h-6 w-6"
+                />
+                Continue with Google
+              </Button>
+            </div>
+          )}
         </div>
       </Drawer>
     </React.Fragment>

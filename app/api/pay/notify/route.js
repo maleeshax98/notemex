@@ -30,19 +30,11 @@ export async function POST(req) {
       md5(mSec).toLocaleUpperCase();
 
     const local_md5sig = md5(hashText).toLocaleUpperCase();
-    console.log(
-      order_id,
-      payhere_amount,
-      payhere_currency,
-      status_code,
-      md5sig,
-      local_md5sig,
-      merchant_id
-    );
+
     // local_md5sig === md5sig && status_code === 2
 
     if (local_md5sig === md5sig && status_code === "2") {
-      console.log("test success");
+      // console.log("test success");
       const checkOrder = await prisma.Orders.findUnique({
         where: {
           id: order_id,
@@ -74,6 +66,8 @@ export async function POST(req) {
         },
       });
 
+      // console.log("note id -", noteOwner);
+
       // console.log(noteOwnerId.note.userNotes[0].userId)
 
       if (!noteOwner) {
@@ -103,7 +97,7 @@ export async function POST(req) {
         },
       });
 
-      console.log("updateUser", update);
+      // console.log("updateUser", update);
 
       if (!update) {
         return NextResponse.json({ success: false }, { status: 500 });
@@ -122,6 +116,17 @@ export async function POST(req) {
       // console.log("updatorder", order);
 
       if (!order) {
+        return NextResponse.json({ success: false }, { status: 500 });
+      }
+
+      const saveNote = await prisma.Saved.create({
+        data: {
+          userId: checkOrder.userId,
+          noteId: order.noteId,
+        },
+      });
+
+      if (!saveNote) {
         return NextResponse.json({ success: false }, { status: 500 });
       }
 

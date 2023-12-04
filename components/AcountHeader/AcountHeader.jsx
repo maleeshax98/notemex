@@ -113,7 +113,7 @@ function AcountHeader({ setOpen, edited }) {
                 }}
               />
             </button>
-            <div className="w-full h-[150px] rounded-md overflow-hidden relative">
+            <div className="w-full h-[150px] md:h-[350px] rounded-md overflow-hidden relative">
               <Image
                 src={
                   edited
