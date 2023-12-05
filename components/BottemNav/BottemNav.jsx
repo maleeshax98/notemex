@@ -139,7 +139,7 @@ export default function BottemNav() {
                       <Image
                         src={"/icons/new/skills.svg"}
                         alt="Home Icon"
-                        width={30}
+                        width={35}
                         height={35}
                       />
                     </div>

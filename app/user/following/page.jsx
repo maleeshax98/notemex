@@ -9,7 +9,7 @@ export default function Following() {
   const { inView, ref } = useInView();
   const [page, setPage] = useState(1);
   const [loaded, setLoaded] = useState(false);
-  const { get, loading, data, hasMore } = useGetFollowings();
+  const { get, loading, newData: data, hasMore } = useGetFollowings();
   useEffect(() => {
     get(page);
     setLoaded(true);
