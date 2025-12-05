@@ -1,6 +1,6 @@
 // app/api/admin/decline/route.js
 import { NextResponse } from "next/server";
-import prisma from "@/libs/prisma";
+import prisma from "@/libs/db";
 
 // import { getServerSession } from "next-auth/next";
 // import { authOptions } from "@/lib/auth";
