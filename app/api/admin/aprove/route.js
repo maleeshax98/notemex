@@ -1,6 +1,6 @@
 // app/api/admin/approve/route.js
 import { NextResponse } from "next/server";
-import prisma from "@/libs/prisma";
+import prisma from "@/libs/db";
 
 // If you use next-auth, uncomment and configure the lines below.
 // import { getServerSession } from "next-auth/next";
