@@ -1,5 +1,5 @@
 // app/admin/page.jsx
-import prisma from "@/lib/prisma"; // adjust path if needed
+import prisma from "@/libs/prisma"; // adjust path if needed
 import { formatDistanceToNow } from "date-fns";
 import React from "react";
 
